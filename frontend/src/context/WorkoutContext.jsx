@@ -11,7 +11,7 @@ export const workoutReducer = (state, action) =>{
             return {
                 workouts: action.payload
             }
-        case "CREATE_WOKROUT":
+        case "CREATE_WORKOUT":
             return {
                 // this adds the rest or previous state to the current workout that is been created with the post method to be precise
                 // ..state.workout makes a copy of the workout 

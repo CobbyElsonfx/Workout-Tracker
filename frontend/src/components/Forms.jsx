@@ -9,7 +9,7 @@ import {useWorkoutContext} from "../hooks/useWorkout"
 
 
 const Forms = () =>{
-    const {dispatch} = useWorkoutContext()
+ const {dispatch} = useWorkoutContext()
 
  const [title, setworkTitle] = useState("")
  const [load, setworkoutLoad] = useState("")
@@ -37,7 +37,6 @@ const Forms = () =>{
     const  data = await response.json()
     //check if data is okay 
     // this error is comming from the response for the post  controller in the workout.js file in the controllers
-
     if(!response.ok){
         setErrors(data.error)
     }
