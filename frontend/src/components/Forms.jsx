@@ -6,18 +6,21 @@ import {useWorkoutContext} from "../hooks/useWorkout"
 
 
 
+
+
 const Forms = () =>{
+    const {dispatch} = useWorkoutContext()
+
  const [title, setworkTitle] = useState("")
  const [load, setworkoutLoad] = useState("")
  const [reps, setworkoutReps] = useState("")
  const [errors, setErrors] = useState(null)
- const {dispatch} = useWorkoutContext()
 
  
  const handleForm = async (ev) =>{
     ev.preventDefault()
 
-    const {dd}
+
     const workout = {title,load,reps}
     
    // fetch the data from the backend server
@@ -46,8 +49,6 @@ const Forms = () =>{
         setworkoutReps("")
         dispatch({type:"CREATE_WORKOUT", payload: data})
     }
-
-    console.log(errors)
     
  }
  
@@ -55,7 +56,7 @@ const Forms = () =>{
 
 
     return (
-        <div>
+        
             <form  className="create" onSubmit ={handleForm} >
                 <h3>Add Workout</h3>
                 
@@ -74,7 +75,7 @@ const Forms = () =>{
 
                 <button>Add Workout</button>
                 {errors && <div className="error">{errors} </div>}</form>
-        </div>
+    
     )
 }
 

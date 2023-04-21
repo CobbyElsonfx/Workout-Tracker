@@ -1,6 +1,5 @@
 import React from 'react'
 import {useEffect , useState} from "react"
-import axios from "axios"
 import WorkoutDetails from "../components/WorkoutDetails"
 import Forms from  "../components/Forms"
 import {useWorkoutContext} from "../hooks/useWorkout"
@@ -15,21 +14,25 @@ function Home() {
 
 
 //fecth for workouts
-const fetchWorkout = async ()=>{
-        try {
+
+
+useEffect(() => {
+    const fetchWorkout = async ()=>{
+        
             const response = await  fetch("http://localhost:8585/api/workouts")
             const data =  await response.json()
-            dispatch({type: "SET_WORKOUT" , payload: data})
-        } catch (error) {
-            console.error(error)
-        }
+            if (response.ok){
+             dispatch({type: "SET_WORKOUT" , payload: data})
+            }
+       
         
    
 }
-
-useEffect(() => {
  fetchWorkout()  
-}, [])
+}, [dispatch])
+
+
+
 
 
     

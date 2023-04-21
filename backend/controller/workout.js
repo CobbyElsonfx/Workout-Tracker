@@ -10,7 +10,7 @@ const mongoose = require("mongoose")
 //GET ALL WORKOUTS
 const getAll_workout = async (req,res)=>{
     try {
-        const workout = await Workoutmodel.find({}).sort({createAt:-1})
+        const workout = await Workoutmodel.find({}).sort({createdAt:-1})
         res.status(200).json(workout)
         
     } catch (error) {
@@ -24,7 +24,7 @@ const post_workout = async (req,res)=>{
     const {title,reps,load} = req.body
     try {
         const workout = await Workoutmodel.create({title,reps,load})
-        res.status(200).json({workout})  
+        res.status(200).json(workout)  
         
     } catch (error) {
        res.status(400).json({error:error.message})        
@@ -47,9 +47,9 @@ const getSingle_workout = async (req,res)=>{
         if(!workout){
           return   res.status(404).json({error:"not found"})
         }
-        else{
+        
           return res.status(200).json(workout)
-        }
+      
         
     } catch (error) {
         res.status(400).json({error:error.message})
@@ -64,15 +64,15 @@ const deleteSingle_workout = async (req,res)=>{
   const {id} = req.params
   try {
     if (!mongoose.Types.ObjectId.isValid(id)){
-        return   res.status(404).json({error:"not found"})
+        return   res.status(404).json({error:"not Valid"})
       }
 
-    const workout = await Workoutmodel.findByIdAndDelete(id)
+    const workout = await Workoutmodel.findOneAndDelete({_id: id})
     
     if(!workout){
       return   res.status(404).json({error:"not found"})
     }else{
-        return res.status(200).json("deleted successfully")
+        return res.status(200).json(workout)
     }
   
   } catch (error) {

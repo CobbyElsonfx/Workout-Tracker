@@ -17,6 +17,10 @@ export const workoutReducer = (state, action) =>{
                 // ..state.workout makes a copy of the workout 
                 workouts:[action.payload, ...state.workouts]
             }
+        case  "DELETE_WORKOUT":
+            return {
+                workouts : state.workouts.filter(data=> data._id !== action.payload._id)
+            }
     
         default:
             return state;
