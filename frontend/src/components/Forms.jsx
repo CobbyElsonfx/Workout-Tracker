@@ -15,6 +15,7 @@ const Forms = () =>{
  const [load, setworkoutLoad] = useState("")
  const [reps, setworkoutReps] = useState("")
  const [errors, setErrors] = useState(null)
+ 
 
  
  const handleForm = async (ev) =>{
@@ -57,22 +58,22 @@ const Forms = () =>{
     return (
         
             <form  className="create" onSubmit ={handleForm} >
-                <h3>Add Workout</h3>
+                <h3 className="font-semibold text-white text-center py-4">Add Workout</h3>
                 
-                    <label htmlFor="title">Exercise's Title</label>
+                    <label htmlFor="title" className="text-white">Exercise's Type</label>
                     {/* Listen to onchange event in the form and set the value to e.value.target which represents the current value of the form */}
-                    <input type="text" value={title}  className="title" onChange={(ev) => setworkTitle(ev.target.value)}/>
+                    <input type="text" value={title}  className="title mb-1" onChange={(ev) => setworkTitle(ev.target.value)}/>
                 
                 
-                    <label htmlFor="reps">Reps </label>
-                    <input type="Number" className="reps" value={reps}  onChange={(ev)=> setworkoutReps(ev.target.value)}/>
+                    <label htmlFor="reps" className="text-white">Number of Reps </label>
+                    <input type="Number" className="reps mb-1" value={reps}  onChange={(ev)=> setworkoutReps(ev.target.value)}/>
                 
                 
-                    <label htmlFor="load">Load (kg)</label>
+                    <label htmlFor="load" className="text-white">Load (kg)</label>
                     <input type="Number" className="load"  value={load} onChange={(ev)=> setworkoutLoad(ev.target.value)}/>
                 
 
-                <button>Add Workout</button>
+                <button type="submit" className="text-white bg-primary focus:outline-none font-medium rounded-md text-sm px-5 py-2.5 text-center mb-2  ">Add Workout</button>
                 {errors && <div className="error">{errors} </div>}</form>
     
     )

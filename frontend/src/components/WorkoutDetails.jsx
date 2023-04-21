@@ -2,6 +2,7 @@ import React from 'react'
 import {useWorkoutContext} from "../hooks/useWorkout"
 
 
+import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
 
 
@@ -21,12 +22,12 @@ function WorkoutDetails({workout}) {
     }
 }
     return (
-        <div className="workout-details">
-          <h4>{workout.title}</h4>
+        <div className="workout-details md:w-3/4 w-full relative">
+          <h4 className="text-primary font-semibold tracking-wide">{workout.title}</h4>
           <p><strong>Load(kg):</strong> {workout.load}</p>
           <p><strong>Reps:</strong> {workout.reps}</p>
-          <p>{workout.createdAt}</p>
-          <span onClick = {deleteHandler}>Delete</span>
+          <p> {formatDistanceToNow(new Date(workout.createdAt),{addSuffix:true}) }</p>
+          <span onClick = {deleteHandler}> <img src="../../delete.svg" alt="" /> </span>
         </div>
     )
 }

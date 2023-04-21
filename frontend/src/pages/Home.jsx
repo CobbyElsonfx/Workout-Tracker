@@ -37,12 +37,14 @@ useEffect(() => {
 
     
     return (
-        <div className="home">
-            <div className="workouts">
+        <div className="home flex flex-col-reverse md:flex-row  ">
+            <div className="workouts w-full md:w-[70%]  md:pr-4 ">
                 {/* mapping throught the array of object to get each workout object and pass it a  prop */}
               {workouts && workouts.map((workout)=> <WorkoutDetails workout = {workout} key={workout._id}/>  )}   
             </div>
-            <Forms/>
+            <div className="mx-auto w-full md:w-[20%]  mt-4 md:mt-0">
+                 <Forms/>
+            </div>
 
          </div>
     )
