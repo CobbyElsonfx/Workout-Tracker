@@ -70,7 +70,7 @@ const Forms = () =>{
                 
                 
                     <label htmlFor="load" className="text-white">Load (kg)</label>
-                    <input type="Number" className="load"  value={load} onChange={(ev)=> setworkoutLoad(ev.target.value)}/>
+                    <input type="Number" className="load  "  value={load} onChange={(ev)=> setworkoutLoad(ev.target.value)}/>
                 
 
                 <button type="submit" className="text-white bg-primary focus:outline-none font-medium rounded-md text-sm px-5 py-2.5 text-center mb-2  ">Add Workout</button>
