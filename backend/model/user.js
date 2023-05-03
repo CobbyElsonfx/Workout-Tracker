@@ -31,9 +31,19 @@ userSchema.pre("save", async function(next){
     next()
 })
 
-// userSchema.statics.login = async (email, password)=>{
-//     const user = await this.findOne({email})
-// }
+userSchema.statics.login = async (email, password)=>{
+    const user = await this.findOne({email})
+    if(user){
+        const auth = await bcrypt.compare(password,user.password)
+        if(auth){
+            return user
+        }else{
+            throw Error("Invalid password")
+        }
+    }else{
+        throw Error("email not registered")
+    }
+}
 
 
 

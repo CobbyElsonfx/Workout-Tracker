@@ -15,8 +15,28 @@ const handleError = (err)=>{
 
 }
 
-const loginController = (req,res)=>{
-    res.json({msg: "Hello world from login controller"})
+const createToken =(id)=>{  
+    return jwt.sign({id}, "0558119187A" , {expiresIn: "3d"} )
+}
+
+
+
+
+
+const loginController = async (req,res)=>{
+
+    const {email,password } = req.body
+    try {
+        const user = await  userModel.login({email,password})
+        if(user){
+            const token = await createToken(user_id)
+            res.cookie("jwt", token, {maxAge:2*24*60*60*1000,httpOnly:true} )
+            res.status(200).json({user:user})
+        }
+             
+    } catch (error) {   
+        res.status(400).json({error:error})
+    }
 }
 
 
@@ -24,17 +44,18 @@ const loginController = (req,res)=>{
 
 
 //sigup controller
-const createToken =(id)=>{  
-    return jwt.sign({id}, "0558119187A" , {expiresIn: "3d"} )
-}
+
 
 const signupController = async (req,res)=>{
     const {email,password , username} = req.body
     try {
         const user = await userModel.create({email,password , username})
-        const token = await createToken(user._id)
-        res.cookie("jwt", token, {maxAge:2*24*60*60*1000,httpOnly:true} )
-        res.status(200).json({user:user})
+        if(user){
+            const token = await createToken(user._id)
+            res.cookie("jwt", token, {maxAge:2*24*60*60*1000,httpOnly:true} )
+            res.status(200).json({user:user})
+        }
+        
     } catch (error) {
         const errors =  await handleError(error)
         res.status(400).json({errors})
