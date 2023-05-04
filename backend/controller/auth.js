@@ -9,14 +9,14 @@ const handleError = (err)=>{
         Object.values(err.errors).forEach(({properties})=>{
             error[properties.path] = properties.message
         })
-    }
-       
+    }  
     return error
 
 }
 
 const createToken =(id)=>{  
-    return jwt.sign({id}, "0558119187A" , {expiresIn: "3d"} )
+    return jwt.sign({id}, "0558119187A" , 
+                    {expiresIn: "3d"})
 }
 
 
@@ -24,18 +24,20 @@ const createToken =(id)=>{
 
 
 const loginController = async (req,res)=>{
-
     const {email,password } = req.body
     try {
-        const user = await  userModel.login({email,password})
-        if(user){
-            const token = await createToken(user_id)
-            res.cookie("jwt", token, {maxAge:2*24*60*60*1000,httpOnly:true} )
-            res.status(200).json({user:user})
+        const newUser = await userModel.login(email,password)
+        consolole.log(newUser, "Here is the user")
+        if(newUser){
+            const token = await createToken(newUser_id)
+            res.cookie ("jwt", token, {maxAge:2*24*60*60*1000,httpOnly:true} )
+            console.log(user)
+            res.status(200).json({newUser_id})
         }
              
     } catch (error) {   
-        res.status(400).json({error:error})
+        const errors = handleError(error)
+        res.status(400).json({errors})
     }
 }
 
@@ -49,7 +51,10 @@ const loginController = async (req,res)=>{
 const signupController = async (req,res)=>{
     const {email,password , username} = req.body
     try {
-        const user = await userModel.create({email,password , username})
+        const user = await userModel.create(
+            {email,
+            password , 
+            username})
         if(user){
             const token = await createToken(user._id)
             res.cookie("jwt", token, {maxAge:2*24*60*60*1000,httpOnly:true} )
@@ -57,7 +62,7 @@ const signupController = async (req,res)=>{
         }
         
     } catch (error) {
-        const errors =  await handleError(error)
+        const errors = handleError(error)
         res.status(400).json({errors})
     }
 
