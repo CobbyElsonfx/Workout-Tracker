@@ -4,12 +4,21 @@ const jwt = require("jsonwebtoken")
 
 
 const handleError = (err)=>{
-    const error  = {email:"",  password:""}
+    const error  = {email:"",  password:"" , username:""}
     if(err.message.includes("user validation failed")){
         Object.values(err.errors).forEach(({properties})=>{
             error[properties.path] = properties.message
         })
-    }  
+    } 
+    
+    if(err.code == "11000" && Object.keys(err.keyValue) == "username"){
+        error.email = "Username already exist"
+    }
+
+    if(err.code == "11000" && Object.keys(err.keyValue) == "email"){
+        error.email = "Email already exist"
+    }
+    console.log("object values",Object.keys(err.keyValue))
     return error
 
 }
@@ -58,10 +67,14 @@ const signupController = async (req,res)=>{
         if(user){
             const token = await createToken(user._id)
             res.cookie("jwt", token, {maxAge:2*24*60*60*1000,httpOnly:true} )
-            res.status(200).json({user:user})
+            //send the email and token as a response.
+            console.log("sending the response")
+            res.status(200).json({email,username,token})
         }
         
     } catch (error) {
+        console.log("sending the error")
+        console.log(error)
         const errors = handleError(error)
         res.status(400).json({errors})
     }

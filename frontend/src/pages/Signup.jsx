@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import {useState}  from "react"
 import {Link} from "react-router-dom"
 import {
@@ -6,40 +6,22 @@ import {
     Input,
     Checkbox,
     Button,
-    Typography,
-  } from "@material-tailwind/react";
-
+    Typography
+  } from "@material-tailwind/react"
+import {useSignup } from "../hooks/useSignup"
+import {useAuthContext} from "../hooks/useAuthContext"
 
 function Signup() {
     const [email, setEmail] = useState("")
     const [password,setPassword] = useState("")
     const [username,setUsername] = useState("")
-
+    //import the signup function error and isLoading state
+    const {signup,error,isLoading} = useSignup()
 
     const handleSubmit = async (ev) => {
         ev.preventDefault()
-        
-
-        
-        const res = await fetch("localhost:5050/api/user/signup" , {
-            method:"POST",
-            body: JSON.stringify({email,password,username})
-        })
-
-        const data = await res.json()
-
-        if(!data.ok){
-            console.log("there is an error")
-        }
-
-        if(data.ok){
-            console.log("No error")
-        }
-    
-
+       const users =  await signup(email,password,username)
     }
-
-
 
     return (
         <>
@@ -57,34 +39,25 @@ function Signup() {
                     <Input name="email"  className="text-white" size="lg" label="Email" onChange={(e)=> setEmail(e.target.value)} />
                     <Input name="password"  className="text-white" type="password" size="lg" label="Password" onChange={(e)=> setPassword(e.target.value)} />
                     </div>
-                    <Checkbox
-                    label={
-                        (
-                        <Typography
-                            variant="small"
-                            color="white"
-                            className="flex items-center font-normal"
-                        >
-                            I agree the
-                            <a
-                            href="#"
-                            className="font-medium transition-colors hover:text-blue-500"
-                            >
-                            &nbsp;Terms and Conditions
-                            </a>
-                        </Typography>
-                        )
-                    }
+                    <Checkbox label={
+                                (
+                                <Typography  variant="small"   color="white" className="flex items-center font-normal">
+                                    I agree the
+                                    <a href="#"   className="font-medium transition-colors hover:text-blue-500" > &nbsp;Terms and Conditions </a>
+                                </Typography>
+                                )  }
                     containerProps={{ className: "-ml-2.5" }}
                     />
-                    <Button type="submit"  className="mt-6" fullWidth>
+                    <Button disabled={isLoading} type="submit"  className="mt-6" fullWidth>
                     Register
                     </Button>
+                    {error && <div>{error}</div>}
                     <Typography color="white" className="mt-4 text-center font-normal">
                     Already have an account?{" "}
-                    <a
-                        href="#"
-                        className="font-medium text-blue-500 transition-colors hover:text-blue-700"
+                    <a href="#" className="font-medium 
+                                           text-blue-500 
+                                           transition-colors 
+                                           hover:text-blue-700"
                     >
                         Sign In
                     </a>
@@ -92,9 +65,7 @@ function Signup() {
                 </form>
                 </Card>
             </div>
-        </>
-            
-            
+        </>        
     )
 }
 
