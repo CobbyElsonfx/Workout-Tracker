@@ -8,8 +8,9 @@ const morgan = require("morgan")
 
 //custom imports
 const workoutsRouter = require("./routes/workout")
-const loginRouter = require("./routes/user")
+const authRouter = require("./routes/user")
 const {dbConnection} = require("./db/connection")
+const requireAuth = require("./middleware/requireAuth")
 
 
 
@@ -19,13 +20,14 @@ const {dbConnection} = require("./db/connection")
 const corsOptions = {
     origin: ['https://exercise-tracker-frontend-e4pd.onrender.com',"http://localhost:5173",]
   };
-app.use(cors());
+
+app.use(cors({origin:"*"}));
 app.use(express.json())
 app.use(morgan("dev"))
 app.use(express.static(path.join(__dirname,"public")))
 
 app.use("/api/workouts", workoutsRouter)
-app.use("/api/user",loginRouter)
+app.use("/api/user",authRouter)
 
 
 

@@ -13,6 +13,9 @@ function WorkoutDetails({workout}) {
   const deleteHandler = async ()=> {
     const response =  await fetch(`https://backend-exercise-tracker-wtnx.onrender.com/api/workouts/${workout._id}` , {
       method: "DELETE",
+      headers :{
+        "Authentication":`Bearer ${user.token}`,
+      }
     })
     const data =  await response.json()
 
