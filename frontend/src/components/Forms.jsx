@@ -9,7 +9,7 @@ import {useWorkoutContext} from "../hooks/useWorkout"
 
 
 const Forms = () =>{
- const {dispatch} = useWorkoutContext()
+ const {user, dispatch} = useWorkoutContext()
 
  const [title, setworkTitle] = useState("")
  const [load, setworkoutLoad] = useState("")
@@ -29,6 +29,7 @@ const Forms = () =>{
         method:"POST",
         body: JSON.stringify(workout),
         headers:{
+            "Authentication":`Bearer ${user.token}`,
             "Content-Type":"application/json"
         }
     })
