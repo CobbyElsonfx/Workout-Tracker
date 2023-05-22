@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState}  from  "react"
-import {useWorkoutContext} from "../hooks/useWorkout"
+import {useWorkoutContext} from "../hooks/useWorkoutContext"
+import {useAuthContext} from "../hooks/useAuthContext"
 
 
 
@@ -9,7 +10,8 @@ import {useWorkoutContext} from "../hooks/useWorkout"
 
 
 const Forms = () =>{
- const {user, dispatch} = useWorkoutContext()
+ const { dispatch} = useWorkoutContext()
+ const {user}  = useAuthContext()
 
  const [title, setworkTitle] = useState("")
  const [load, setworkoutLoad] = useState("")
@@ -25,15 +27,14 @@ const Forms = () =>{
     const workout = {title,load,reps}
     
    // fetch the data from the backend server
-    const response = await fetch("https://backend-exercise-tracker-wtnx.onrender.com/api/workouts" , {
+    const response = await fetch("http://localhost:5050/api/workouts" , {
         method:"POST",
         body: JSON.stringify(workout),
         headers:{
-            "Authentication":`Bearer ${user.token}`,
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+            "Authorization":`Bearer ${user.token}`,        
         }
     })
-     
      //parse data to json format
 
     const  data = await response.json()
@@ -57,8 +58,7 @@ const Forms = () =>{
 
 
     return (
-        
-            <form  className="create" onSubmit ={handleForm} >
+            <form  className="create addWorkoutForm shadow-md py-4 px-5" onSubmit ={handleForm} >
                 <h3 className="font-semibold text-white text-center py-4">Add Workout</h3>
                 
                     <label htmlFor="title" className="text-white">Exercise's Type</label>

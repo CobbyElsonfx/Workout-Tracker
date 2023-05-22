@@ -15,7 +15,6 @@ function useSignup() {
             const res = await fetch("http://localhost:5050/api/user/signup",{
             method:"POST",
             headers: {
-              "Authentication":`Bearer ${user.token}`,
               "Content-Type":"application/json"},
             body:JSON.stringify(user)
               })
