@@ -2,6 +2,15 @@
 # Live Link: https://exercise-tracker-frontend-e4pd.onrender.com
 
 
+## Challenges
+### DATABASE WORKOUT SHOWCASE 
+#### After I adding the authentication I realised that when a user logs in he sees the workout added by others users, which means every user is presented with all the workouts in the database. 
+
+### I accessed the user.id  from the requireAuth middleware (id was extracted from the token returned from the authorization header) in the workout controller , where  I attached it to the user object and saved it to the database. I updated the model by inlcuding a userId section so that each workout saved in the database could be retrieved using the current userId it was assigned to.
+
+
+
+
 ### This is a MERN stack web application that allows you to track exercises you do every day. It uses Node.js and Express for the backend, and React for the frontend. The application manages the state using React's useContext and useReducer hooks.
 ## Getting Started
 
@@ -9,7 +18,7 @@
 
    1. Clone this repository to your local machine
    2. In the root directory of the project, run npm install to install the required dependencies
-   3. Run npm start to start the backend server on port 8585
+   3. Run npm run dev to start the backend server on port 8585
    4. In a new terminal window, navigate to the frontend directory and run npm install to install the frontend dependencies
    5. Run npm run dev to start the React development server on port 5173
    6. Open your browser and go to http://localhost:5173 to view the application
