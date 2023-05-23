@@ -19,7 +19,7 @@
 The application allows you to create new exercises, edit existing ones, and delete them. To create a new exercise, click on the "Add Workout" button and fill in the form. To delete an exercise, click on the "Delete" button next to the exercise you want to delete.
 ## Future Improvements
 
- Currently, the application does not use any authentication, so anyone can create, edit, or delete exercises. In the future, I plan to add authentication using a third-party service like Google or Facebook, or by implementing our own authentication system using JWT.
+ In the future, I plan to add authentication using a third-party service like Google or Facebook.
 ## Contributing
 
  We welcome contributions from anyone! If you find a bug or want to suggest an improvement, please create a new issue or submit a pull request.
