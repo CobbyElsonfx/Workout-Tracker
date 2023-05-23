@@ -1,5 +1,7 @@
 # Exercise Tracker
 # Live Link: https://exercise-tracker-frontend-e4pd.onrender.com
+# screenshots
+![Home Page](https://drive.google.com/file/d/1VV_3gyVJl7MmFDDE3DtBDYsPySBdZg-p/view?usp=share_link)
 
 
 
