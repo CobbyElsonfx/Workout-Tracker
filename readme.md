@@ -1,8 +1,12 @@
 # Exercise Tracker
 # Live Link: https://exercise-tracker-frontend-e4pd.onrender.com
 # screenshots
+#### Desktop View
 ![Home Page](Screenshot 2023-05-23 at 4.02.58 PM 1![image](https://github.com/CobbyElsonfx/Exercise-Tracker/assets/109095646/79d1e8e8-4c51-4b27-b46a-582c1eec3b2e)
 )
+
+#### Mobile View 
+Screenshot 2023-05-23 at 4.16.22 PM![image](https://github.com/CobbyElsonfx/Exercise-Tracker/assets/109095646/4d483d65-1fc5-495f-89fa-8875aacf43cc)
 
 
 
