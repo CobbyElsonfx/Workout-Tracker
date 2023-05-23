@@ -30,7 +30,7 @@ function Navbar() {
                 )}
                 {!user && (
                     <div className="px-10 space-x-2">
-                    <Link to="/login" className="text-darkGrayishBlue hover:text-veryDarkBlue hover:underline px-1 transition  transition-all ">
+                    <Link to="/login" className="text-darkGrayishBlue hover:text-veryDarkBlue text-white p-2 rounded-md bg-primary">
                         Login
                     </Link>
                     <Link to="/signup" className="text-darkGrayishBlue hidden hover:text-veryDarkBlue transition transition-all">
