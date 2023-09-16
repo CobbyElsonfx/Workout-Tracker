@@ -1,6 +1,4 @@
 
-
-
 <div align="center">
   <h3><b>Workout Tracker</b></h3>
 </div>
